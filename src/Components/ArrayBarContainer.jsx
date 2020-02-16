@@ -3,6 +3,7 @@ import ArrayBar from "./ArrayBar"
 import "./arrayBarContainer.css"
 import { mergeHelper } from "../sortingAlgorithms/mergeSort"
 import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
+import { bubbleHelper } from "../sortingAlgorithms/bubbleSort"
 
 
 class ArrayBarContainer extends React.Component{
@@ -86,6 +87,16 @@ class ArrayBarContainer extends React.Component{
     return 1;
   }
 
+  async bubbleAnimate(){
+    if (this.state.isRunning){
+      return -1;
+    }
+    getButtons(0.4);
+    this.startRunning();
+    let arrDOM = getBars();
+    await bubbleHelper(arrDOM);
+    return 1
+  }
 //#############################################################################
 
 //promise fucntion for async animate
@@ -116,6 +127,11 @@ class ArrayBarContainer extends React.Component{
             onClick={() => this.mergeInPlaceAnimate().then((res) => this.finished(res, 1))}
             >
             Merge Sort In Place
+          </button>
+          <button className="abtn"
+            onClick={() => this.bubbleAnimate()}
+            >
+            Bubble Sort
           </button>
         </div>
       </div>

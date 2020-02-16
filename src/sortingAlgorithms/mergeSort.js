@@ -19,17 +19,16 @@ const mergeSort = async (start, end, array, cpA, cpB) => {
 
   const mid = Math.floor((start + end) / 2);
 
-  await Promise.all([
-    mergeSort(start, mid, array, cpB, cpA),
-    mergeSort(mid + 1, end, array, cpB, cpA)
-  ])
+  //**uncomment to run left + right merge
+  // await Promise.all([
+  //   mergeSort(start, mid, array, cpB, cpA),
+  //   mergeSort(mid + 1, end, array, cpB, cpA)
+  // ])
 
-  /* uncomment the code below and comment out
-     the code above 'await Promise.all(...)'
-     to have mergeSort run left -> right
-     rather than left + right */
-  // await mergeSort(start, mid, array, cpB, cpA)
-  // await mergeSort(mid + 1, end, array, cpB, cpA)
+
+  //**comment to run left -> right merge
+  await mergeSort(start, mid, array, cpB, cpA)
+  await mergeSort(mid + 1, end, array, cpB, cpA)
 
   await merge(start, mid, end, array, cpA, cpB);
 }
@@ -46,7 +45,7 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
     array[j].style.backgroundColor = COLOR_SELECT;
     if (cpB[i] <= cpB[j]){
       cpA[k] = cpB[i];
-      await sleep(15);
+      await sleep(0);
       swap(array[k], cpA[k++]);
       array[i].style.backgroundColor = COLOR_MAIN;
       array[j].style.backgroundColor = COLOR_MAIN;
@@ -54,7 +53,7 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
     }
     else{
       cpA[k] = cpB[j];
-      await sleep(15);
+      await sleep(0);
       swap(array[k], cpA[k++]);
       array[i].style.backgroundColor = COLOR_MAIN;
       array[j].style.backgroundColor = COLOR_MAIN;
@@ -64,13 +63,13 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
 
   while (i <= mid){
     cpA[k] = cpB[i++];
-    await sleep(15);
+    await sleep(0);
     swap(array[k], cpA[k++]);
   }
 
   while(j <= end){
     cpA[k] = cpB[j++];
-    await sleep(15);
+    await sleep(0);
     swap(array[k], cpA[k++]);
   }
 }

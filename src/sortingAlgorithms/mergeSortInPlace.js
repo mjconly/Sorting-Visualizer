@@ -14,34 +14,19 @@ const mergeSortInPlace = async (array) => {
   let s1 = array.slice(0, array.length / 2);
   let s2 = array.slice(array.length / 2);
 
-  await Promise.all([mergeSortInPlace(s1), mergeSortInPlace(s2)])
-    .then((values) => {[s1, s2] = values});
-  // s1 = await mergeSort(s1);
-  // s2 = await mergeSort(s2);
+  //uncomment to merge left + right merge
+  // await Promise.all([mergeSortInPlace(s1), mergeSortInPlace(s2)])
+  //   .then((values) => {[s1, s2] = values});
+
+  //comment to run left -> right merge
+  s1 = await mergeSortInPlace(s1);
+  s2 = await mergeSortInPlace(s2);
 
   let s = await merge(s1, s2);
 
   return s;
 }
 
-// const inPlaceHelper = (arr) => {
-//   mergeSort(0, arr.length - 1, arr);
-//   return arr;
-// }
-
-// const mergeSort = (start, end, arr) => {
-//   if (start >= end){
-//     return;
-//   }
-//
-//   const mid = Math.floor((start + end) / 2);
-//
-//   mergeSort(start, mid, array)
-//   mergeSort(mid + 1, end, array)
-//
-//   merge(start, mid, end, arr);
-//
-// }
 
 const merge = async (a1, a2) => {
   const a = a1.concat(a2);
