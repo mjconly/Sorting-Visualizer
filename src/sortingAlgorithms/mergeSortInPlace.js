@@ -1,8 +1,8 @@
 const COLOR_MAIN = "#36454F"
 const COLOR_SELECT = "tomato"
 
-const inPlaceHelper = (arr) => {
-  mergeSortInPlace(arr);
+const inPlaceHelper = async (arr) => {
+  await mergeSortInPlace(arr);
   return arr;
 }
 

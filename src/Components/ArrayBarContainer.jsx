@@ -19,7 +19,7 @@ class ArrayBarContainer extends React.Component{
   }
 
 
-  resetArray(size=500){
+  async resetArray(size=500){
     try{
       this.isRunning();
 
@@ -65,9 +65,9 @@ class ArrayBarContainer extends React.Component{
 //################################## Algorithm Calls #########################
   async mergeAnimate(){
     if (this.state.isRunning){
-      return
+      return -1;
     }
-    getButtons(0.3);
+    getButtons(0.4);
     this.startRunning();
     let arrDOM = getBars();
     await mergeHelper(arrDOM)
@@ -76,9 +76,9 @@ class ArrayBarContainer extends React.Component{
 
   async mergeInPlaceAnimate(){
     if (this.state.isRunning){
-      return
+      return -1;
     }
-    getButtons(0.3);
+    getButtons(0.4);
     await this.resetArray(100);
     this.startRunning();
     let arrDOM = getBars();
@@ -89,7 +89,10 @@ class ArrayBarContainer extends React.Component{
 //#############################################################################
 
 //promise fucntion for async animate
-  finished (val){
+  finished (status, val){
+    if (status === -1){
+      return
+    }
     getButtons(val);
     this.stopRunning();
   }
@@ -105,12 +108,12 @@ class ArrayBarContainer extends React.Component{
             Reset
           </button>
           <button className="abtn"
-            onClick={() => this.mergeAnimate().then(() => this.finished(1))}
+            onClick={() => this.mergeAnimate().then((res) => this.finished(res, 1))}
             >
             Merge Sort
           </button>
           <button className="abtn"
-            onClick={() => this.mergeInPlaceAnimate().then(() => this.finished(1))}
+            onClick={() => this.mergeInPlaceAnimate().then((res) => this.finished(res, 1))}
             >
             Merge Sort In Place
           </button>
@@ -133,8 +136,8 @@ const getButtons = (val) => {
   const buttonsDOM = document.getElementsByClassName("abtn");
   for (let i = 0; i < buttonsDOM.length; i++){
     let btn = buttonsDOM[i];
-    btn.disabled = !btn.disabled;
-    btn.style.opacity = `${val}` 
+    // btn.disabled = !btn.disabled;
+    btn.style.opacity = `${val}`
   }
 }
 
