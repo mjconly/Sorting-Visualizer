@@ -6,6 +6,11 @@ import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
 import { bubbleHelper } from "../sortingAlgorithms/bubbleSort"
 
 
+//constants for number of bars per algorithm
+const MERGE = 500;
+const INPLACE = 150;
+const BUBBLE = 150;
+
 class ArrayBarContainer extends React.Component{
   constructor(props){
     super(props);
@@ -80,7 +85,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(100);
+    await this.resetArray(INPLACE);
     this.startRunning();
     let arrDOM = getBars();
     await inPlaceHelper(arrDOM);
@@ -92,6 +97,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
+    await this.resetArray(BUBBLE)
     this.startRunning();
     let arrDOM = getBars();
     await bubbleHelper(arrDOM);
@@ -129,7 +135,7 @@ class ArrayBarContainer extends React.Component{
             Merge Sort In Place
           </button>
           <button className="abtn"
-            onClick={() => this.bubbleAnimate()}
+            onClick={() => this.bubbleAnimate().then((res) => this.finished(res, 1))}
             >
             Bubble Sort
           </button>
@@ -152,7 +158,7 @@ const getButtons = (val) => {
   const buttonsDOM = document.getElementsByClassName("abtn");
   for (let i = 0; i < buttonsDOM.length; i++){
     let btn = buttonsDOM[i];
-    // btn.disabled = !btn.disabled;
+    btn.disabled = !btn.disabled;
     btn.style.opacity = `${val}`
   }
 }
