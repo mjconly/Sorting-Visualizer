@@ -4,12 +4,14 @@ import "./arrayBarContainer.css"
 import { mergeHelper } from "../sortingAlgorithms/mergeSort"
 import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
 import { bubbleHelper } from "../sortingAlgorithms/bubbleSort"
+import { insertionHelper } from "../sortingAlgorithms/insertionSort"
 
 
 //constants for number of bars per algorithm
 const MERGE = 500;
-const INPLACE = 150;
-const BUBBLE = 150;
+const INPLACE = 100;
+const BUBBLE = 100;
+const INSERTION = 100;
 
 class ArrayBarContainer extends React.Component{
   constructor(props){
@@ -103,6 +105,18 @@ class ArrayBarContainer extends React.Component{
     await bubbleHelper(arrDOM);
     return 1
   }
+
+  async insertionAnimate(){
+    if (this.state.isRunning){
+      return -1;
+    }
+    getButtons(0.4);
+    await this.resetArray(INSERTION)
+    this.startRunning();
+    let arrDOM = getBars();
+    await insertionHelper(arrDOM);
+    return 1
+  }
 //#############################################################################
 
 //promise fucntion for async animate
@@ -138,6 +152,11 @@ class ArrayBarContainer extends React.Component{
             onClick={() => this.bubbleAnimate().then((res) => this.finished(res, 1))}
             >
             Bubble Sort
+          </button>
+          <button className="abtn"
+            onClick={() => this.insertionAnimate().then((res) => this.finished(res, 1))}
+            >
+            Insertion Sort
           </button>
         </div>
       </div>

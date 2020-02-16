@@ -27,7 +27,6 @@ const mergeSortInPlace = async (array) => {
   return s;
 }
 
-
 const merge = async (a1, a2) => {
   const a = a1.concat(a2);
   let p1 = 0;
@@ -80,3 +79,83 @@ function sleep(ms){
 
 
 export { inPlaceHelper }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const mergeSortInPlace = async (start, end, arr) => {
+//   if (start >= end){
+//     return
+//   }
+//
+//   const mid = Math.floor((start + end) / 2);
+//
+//   await mergeSortInPlace(start, mid, arr);
+//   await mergeSortInPlace(mid + 1, end, arr);
+//
+//   await merge(start, mid, end, arr);
+// }
+//
+// const merge = async (start, mid, end, arr) => {
+//   let i = start;
+//   let j = mid + 1;
+//
+//   while (i <= mid && j <= end){
+//     let a1Val = parseInt(arr[i].style.height.substring(0, arr[i].style.height.length - 2));
+//     let a2Val = parseInt(arr[j].style.height.substring(0, arr[j].style.height.length - 2));
+//
+//     if (a1Val <= a2Val){
+//       arr[i].style.backgroundColor = COLOR_SELECT;
+//       arr[j].style.backgroundColor = COLOR_SELECT;
+//       await sleep(0);
+//       arr[i].style.backgroundColor = COLOR_MAIN;
+//       arr[j].style.backgroundColor = COLOR_MAIN;
+//       i += 1;
+//     }
+//     else{
+//       let idx = j;
+//       let tmp = parseInt(arr[idx].style.height.substring(0, arr[idx].style.height.length - 2));
+//
+//
+//       while (idx !== i){
+//         arr[i].style.backgroundColor = COLOR_SELECT;
+//         arr[idx].style.backgroundColor = COLOR_SELECT;
+//         await sleep(0);
+//         let newHeight = parseInt(arr[idx - 1].style.height.substring(0, arr[idx - 1].style.height.length - 2));
+//         arr[idx].style.height = `${newHeight}px`;
+//         arr[idx].style.backgroundColor = COLOR_MAIN;
+//         arr[idx - 1].style.backgroundColor = COLOR_MAIN;
+//         idx -= 1;
+//       }
+//       arr[i].style.height = `${tmp}px`;
+//
+//       i += 1;
+//       mid += 1;
+//       j += 1;
+//     }
+//   }
+// }
