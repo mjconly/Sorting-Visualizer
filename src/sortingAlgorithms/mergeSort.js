@@ -2,13 +2,13 @@ const COLOR_MAIN = "#36454F"
 const COLOR_SELECT = "tomato"
 
 
-const mergeHelper = (arr) => {
+const mergeHelper = async (arr) => {
   const cpA = arr.map((div) => {
     const divpx = div.style.height;
     return parseInt(divpx.substring(0, divpx.length - 2));
   })
   const cpB = cpA.slice();
-  mergeSort(0, arr.length - 1, arr, cpA, cpB);
+  await mergeSort(0, arr.length - 1, arr, cpA, cpB);
   return arr;
 }
 
@@ -46,7 +46,7 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
     array[j].style.backgroundColor = COLOR_SELECT;
     if (cpB[i] <= cpB[j]){
       cpA[k] = cpB[i];
-      await sleep(10);
+      await sleep(15);
       swap(array[k], cpA[k++]);
       array[i].style.backgroundColor = COLOR_MAIN;
       array[j].style.backgroundColor = COLOR_MAIN;
@@ -54,7 +54,7 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
     }
     else{
       cpA[k] = cpB[j];
-      await sleep(10);
+      await sleep(15);
       swap(array[k], cpA[k++]);
       array[i].style.backgroundColor = COLOR_MAIN;
       array[j].style.backgroundColor = COLOR_MAIN;
@@ -64,13 +64,13 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
 
   while (i <= mid){
     cpA[k] = cpB[i++];
-    await sleep(10);
+    await sleep(15);
     swap(array[k], cpA[k++]);
   }
 
   while(j <= end){
     cpA[k] = cpB[j++];
-    await sleep(10);
+    await sleep(15);
     swap(array[k], cpA[k++]);
   }
 }

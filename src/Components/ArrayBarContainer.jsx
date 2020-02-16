@@ -2,13 +2,15 @@ import React from "react";
 import ArrayBar from "./ArrayBar"
 import "./arrayBarContainer.css"
 import { mergeHelper } from "../sortingAlgorithms/mergeSort"
+import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
 
 
 class ArrayBarContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      bars: []
+      bars: [],
+      isRunning: false,
     }
   }
 
@@ -16,34 +18,83 @@ class ArrayBarContainer extends React.Component{
     this.resetArray();
   }
 
-  resetArray(){
-    const values = []
-    for(let i = 0; i < 500; i++){
-      values.push(Math.floor(Math.random() * (500 - 10 + 1) + 10))
+
+  resetArray(size=500){
+    try{
+      this.isRunning();
+
+      const values = []
+      for(let i = 0; i < size; i++){
+        values.push(Math.floor(Math.random() * (500 - 10 + 1) + 10))
+      }
+      const barArray = values.map((val, idx) => {
+        return (
+          <ArrayBar value={val} key={idx}/>
+        )
+      })
+      this.setState({
+        bars: barArray,
+        isRunning: false
+      })
+
     }
-    const barArray = values.map((val, idx) => {
-      return (
-        <ArrayBar value={val} key={idx}/>
-      )
-    })
+    catch(e){
+      console.log(e);
+    }
+  }
+
+  startRunning() {
     this.setState({
-      bars: barArray
+      isRunning: true
     })
   }
 
-  mergeAnimate(){
-    const barsDOM = document.getElementsByClassName('array-bar')
-    const arrDOM = [];
-    for (let i = 0; i < barsDOM.length; i++){
-      arrDOM.push(barsDOM[i]);
+  isRunning(){
+    if(this.state.isRunning){
+      throw "Interuppting Algorithm in Progress!"
     }
+  }
 
-    let bars = mergeHelper(arrDOM);
-    console.log(bars);
+  stopRunning(){
+    this.setState({
+      isRunning: false,
+    })
+  }
+
+
+//################################## Algorithm Calls #########################
+  async mergeAnimate(){
+    if (this.state.isRunning){
+      return
+    }
+    getButtons(0.3);
+    this.startRunning();
+    let arrDOM = getBars();
+    await mergeHelper(arrDOM)
+    return 1;
+  }
+
+  async mergeInPlaceAnimate(){
+    if (this.state.isRunning){
+      return
+    }
+    getButtons(0.3);
+    await this.resetArray(100);
+    this.startRunning();
+    let arrDOM = getBars();
+    await inPlaceHelper(arrDOM);
+    return 1;
+  }
+
+//#############################################################################
+
+//promise fucntion for async animate
+  finished (val){
+    getButtons(val);
+    this.stopRunning();
   }
 
   render(){
-
     return(
       <div>
         <div className="array-bar-container">
@@ -53,15 +104,37 @@ class ArrayBarContainer extends React.Component{
           <button className="abtn" onClick={() => this.resetArray()}>
             Reset
           </button>
-          <button className="abtn" onClick={() => this.mergeAnimate()}>
-            MergeSort
+          <button className="abtn"
+            onClick={() => this.mergeAnimate().then(() => this.finished(1))}
+            >
+            Merge Sort
           </button>
-          <button className="abtn">
-            QuickSort
+          <button className="abtn"
+            onClick={() => this.mergeInPlaceAnimate().then(() => this.finished(1))}
+            >
+            Merge Sort In Place
           </button>
         </div>
       </div>
     )
+  }
+}
+
+const getBars = () => {
+  const barsDOM = document.getElementsByClassName('array-bar')
+  const arrDOM = [];
+  for (let i = 0; i < barsDOM.length; i++){
+    arrDOM.push(barsDOM[i]);
+  }
+  return arrDOM;
+}
+
+const getButtons = (val) => {
+  const buttonsDOM = document.getElementsByClassName("abtn");
+  for (let i = 0; i < buttonsDOM.length; i++){
+    let btn = buttonsDOM[i];
+    btn.disabled = !btn.disabled;
+    btn.style.opacity = `${val}` 
   }
 }
 
