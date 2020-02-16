@@ -1,0 +1,36 @@
+.array-bar-container{
+  display: flex;
+  flex-direction: row;
+  background-color: #ccc;
+  margin-top: 2em;
+  height: 521px;
+}
+
+.abtn {
+  border: black 0.5px solid;
+  padding: .5em;
+  margin: .5em .5em 0 0;
+  background: rgba(0,0,0,0);
+  border-radius: 5px;
+  font-family: fantasy;
+  width: 150px;
+}
+
+.abtn:hover{
+  background: rgba(54, 69, 79);
+  color: white;
+}
+
+.abtn:active{
+  box-shadow: 1px 2px black;
+}
+
+.abtn:focus{
+  outline: none;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
