@@ -15,7 +15,7 @@ const INPLACE = 100;
 const BUBBLE = 100;
 const INSERTION = 100;
 const QUICK = 500;
-const HEAP = 100;
+const HEAP = 500;
 
 class ArrayBarContainer extends React.Component{
   constructor(props){
