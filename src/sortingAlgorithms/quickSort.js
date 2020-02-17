@@ -30,7 +30,7 @@ const partition = async (lo, hi, arr) => {
 
   for (let j = lo; j < hi; j++){
     arr[j].style.backgroundColor = COLOR_SELECT
-    await sleep(1);
+    await sleep(0);
     const currHeight = arr[j].style.height;
     const currVal = parseInt(currHeight.substring(0, currHeight.length - 2))
 
@@ -43,7 +43,7 @@ const partition = async (lo, hi, arr) => {
 
       arr[i].style.backgroundColor = COLOR_SELECT
 
-      await sleep(1)
+      await sleep(0)
       arr[i].style.height = `${jVal}px`;
       arr[j].style.height = `${iVal}px`;
 
@@ -61,7 +61,7 @@ const partition = async (lo, hi, arr) => {
 
   arr[i].style.backgroundColor = COLOR_SELECT
 
-  await sleep(1);
+  await sleep(0);
   arr[hi].style.height = `${iVal}px`;
   arr[i].style.height = `${p}px`;
 

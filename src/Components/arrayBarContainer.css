@@ -3,14 +3,19 @@
   flex-direction: row;
   background-color: white;
   margin: 1em;
-  height: 525px;
-  padding: 0 10px 10px 10px;
+  height: 501px;
+  /* padding: 0 10px 10px 10px; */
 }
 
 .card {
   margin: 2em;
 }
 
+.console{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
 
 .abtn {
@@ -37,13 +42,15 @@
   outline: none;
 }
 
-.btn-row {
+.btn-col {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
+  align-self: flex-start;
+  margin-top: 1.5em;
 }
 
-.abtn-r {
+ .r {
   border: #ff3f3f 0.5px solid;
   padding: .2em;
   margin: .5em .5em 0 0;
@@ -54,16 +61,26 @@
   color: #ff3f3f;
 }
 
-.abtn-r:hover{
+ .r:hover{
   /* background: rgba(54, 69, 79); */
   background: #ff3f3f;
   color: white;
 }
 
-.abtn-r:active{
+ .r:active{
   box-shadow: 1px 2px #ff3f3f;
 }
 
-.abtn-r:focus{
+.r:focus{
   outline: none;
+}
+
+@media only screen and (max-width: 450px) {
+  .console {
+    flex-direction: column;
+  }
+
+  .btn-col{
+    margin: auto;
+  }
 }

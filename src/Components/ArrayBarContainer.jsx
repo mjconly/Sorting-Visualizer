@@ -145,14 +145,9 @@ class ArrayBarContainer extends React.Component{
 
   render(){
     return(
-      <div>
-        <div className="card">
-          <div className="array-bar-container">
-            {this.state.bars}
-          </div>
-        </div>
-        <div className="btn-row">
-          <button className="abtn-r" onClick={() => this.resetArray()}>
+      <div className="console">
+        <div className="btn-col">
+          <button className="abtn r" onClick={() => this.resetArray()}>
             Reset
           </button>
           <button className="abtn"
@@ -180,6 +175,11 @@ class ArrayBarContainer extends React.Component{
             >
             Quick Sort
           </button>
+        </div>
+        <div className="card">
+          <div className="array-bar-container">
+            {this.state.bars}
+          </div>
         </div>
       </div>
     )
