@@ -5,6 +5,7 @@ import { mergeHelper } from "../sortingAlgorithms/mergeSort"
 import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
 import { bubbleHelper } from "../sortingAlgorithms/bubbleSort"
 import { insertionHelper } from "../sortingAlgorithms/insertionSort"
+import { quickHelper } from "../sortingAlgorithms/quickSort"
 
 
 //constants for number of bars per algorithm
@@ -76,6 +77,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
+    await this.resetArray(MERGE);
     this.startRunning();
     let arrDOM = getBars();
     await mergeHelper(arrDOM)
@@ -115,6 +117,18 @@ class ArrayBarContainer extends React.Component{
     this.startRunning();
     let arrDOM = getBars();
     await insertionHelper(arrDOM);
+    return 1
+  }
+
+  async quickAnimate(){
+    if (this.state.isRunning){
+      return -1;
+    }
+    getButtons(0.4);
+    await this.resetArray(INSERTION)
+    this.startRunning();
+    let arrDOM = getBars();
+    await quickHelper(arrDOM);
     return 1
   }
 //#############################################################################
@@ -157,6 +171,11 @@ class ArrayBarContainer extends React.Component{
             onClick={() => this.insertionAnimate().then((res) => this.finished(res, 1))}
             >
             Insertion Sort
+          </button>
+          <button className="abtn"
+            onClick={() => this.quickAnimate().then((res) => this.finished(res, 1))}
+            >
+            Quick Sort
           </button>
         </div>
       </div>
