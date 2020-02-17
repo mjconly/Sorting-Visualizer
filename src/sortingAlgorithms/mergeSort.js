@@ -44,9 +44,10 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
   while (i <= mid && j <= end){
     array[i].style.backgroundColor = COLOR_SELECT;
     array[j].style.backgroundColor = COLOR_SELECT;
+    await sleep(0);
     if (cpB[i] <= cpB[j]){
       cpA[k] = cpB[i];
-      await sleep(0);
+      // await sleep(0);
       swap(array[k], cpA[k++]);
       array[i].style.backgroundColor = COLOR_MAIN;
       array[j].style.backgroundColor = COLOR_MAIN;
@@ -54,7 +55,7 @@ const merge = async (start, mid, end, array, cpA, cpB) => {
     }
     else{
       cpA[k] = cpB[j];
-      await sleep(0);
+      // await sleep(0);
       swap(array[k], cpA[k++]);
       array[i].style.backgroundColor = COLOR_MAIN;
       array[j].style.backgroundColor = COLOR_MAIN;
