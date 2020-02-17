@@ -6,6 +6,7 @@ import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
 import { bubbleHelper } from "../sortingAlgorithms/bubbleSort"
 import { insertionHelper } from "../sortingAlgorithms/insertionSort"
 import { quickHelper } from "../sortingAlgorithms/quickSort"
+import { heapHelper } from "../sortingAlgorithms/heapSort"
 
 
 //constants for number of bars per algorithm
@@ -14,6 +15,7 @@ const INPLACE = 100;
 const BUBBLE = 100;
 const INSERTION = 100;
 const QUICK = 500;
+const HEAP = 100;
 
 class ArrayBarContainer extends React.Component{
   constructor(props){
@@ -132,6 +134,18 @@ class ArrayBarContainer extends React.Component{
     await quickHelper(arrDOM);
     return 1
   }
+
+  async heapAnimate(){
+    if (this.state.isRunning){
+      return -1;
+    }
+    getButtons(0.4);
+    await this.resetArray(HEAP)
+    this.startRunning();
+    let arrDOM = getBars();
+    await heapHelper(arrDOM);
+    return 1
+  }
 //#############################################################################
 
 //promise fucntion for async animate
@@ -174,6 +188,11 @@ class ArrayBarContainer extends React.Component{
             onClick={() => this.quickAnimate().then((res) => this.finished(res, 1))}
             >
             Quick Sort
+          </button>
+          <button className="abtn"
+            onClick={() => this.heapAnimate().then((res) => this.finished(res, 1))}
+            >
+            Heap Sort
           </button>
         </div>
         <div className="card">
