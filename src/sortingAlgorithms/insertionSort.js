@@ -1,6 +1,6 @@
 //const COLOR_MAIN = "#36454F"
 const COLOR_SELECT = "tomato"
-const COLOR_MAIN = "black"
+const COLOR_MAIN = "#212020"
 
 const insertionHelper = async (arr) => {
   await insertionSort(arr);

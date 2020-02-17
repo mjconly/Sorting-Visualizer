@@ -1,14 +1,21 @@
 .array-bar-container{
   display: flex;
   flex-direction: row;
-  background-color: #ccc;
-  margin-top: 2em;
-  height: 521px;
+  background-color: white;
+  margin: 1em;
+  height: 525px;
+  padding: 0 10px 10px 10px;
 }
+
+.card {
+  margin: 2em;
+}
+
+
 
 .abtn {
   border: black 0.5px solid;
-  padding: .5em;
+  padding: .2em;
   margin: .5em .5em 0 0;
   background: rgba(0,0,0,0);
   border-radius: 5px;
@@ -34,4 +41,29 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.abtn-r {
+  border: #ff3f3f 0.5px solid;
+  padding: .2em;
+  margin: .5em .5em 0 0;
+  background: rgba(0,0,0,0);
+  border-radius: 5px;
+  font-family: fantasy;
+  width: 150px;
+  color: #ff3f3f;
+}
+
+.abtn-r:hover{
+  /* background: rgba(54, 69, 79); */
+  background: #ff3f3f;
+  color: white;
+}
+
+.abtn-r:active{
+  box-shadow: 1px 2px #ff3f3f;
+}
+
+.abtn-r:focus{
+  outline: none;
 }

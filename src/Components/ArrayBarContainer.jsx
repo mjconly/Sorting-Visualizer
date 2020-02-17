@@ -146,11 +146,13 @@ class ArrayBarContainer extends React.Component{
   render(){
     return(
       <div>
-        <div className="array-bar-container">
-          {this.state.bars}
+        <div className="card">
+          <div className="array-bar-container">
+            {this.state.bars}
+          </div>
         </div>
         <div className="btn-row">
-          <button className="abtn" onClick={() => this.resetArray()}>
+          <button className="abtn-r" onClick={() => this.resetArray()}>
             Reset
           </button>
           <button className="abtn"
@@ -161,7 +163,7 @@ class ArrayBarContainer extends React.Component{
           <button className="abtn"
             onClick={() => this.mergeInPlaceAnimate().then((res) => this.finished(res, 1))}
             >
-            Merge Sort In Place
+            Merge In Place
           </button>
           <button className="abtn"
             onClick={() => this.bubbleAnimate().then((res) => this.finished(res, 1))}

@@ -1,7 +1,7 @@
 //const COLOR_MAIN = "#36454F"
 const COLOR_SELECT = "tomato"
 const COLOR_PART = "#2bd1fc"
-const COLOR_MAIN = "black"
+const COLOR_MAIN = "#212020"
 
 
 const quickHelper = async (arr) => {
