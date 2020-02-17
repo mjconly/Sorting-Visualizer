@@ -13,6 +13,7 @@ const MERGE = 500;
 const INPLACE = 100;
 const BUBBLE = 100;
 const INSERTION = 100;
+const QUICK = 100;
 
 class ArrayBarContainer extends React.Component{
   constructor(props){
@@ -125,7 +126,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(INSERTION)
+    await this.resetArray(QUICK)
     this.startRunning();
     let arrDOM = getBars();
     await quickHelper(arrDOM);
