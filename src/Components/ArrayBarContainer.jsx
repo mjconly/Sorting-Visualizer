@@ -13,7 +13,7 @@ const MERGE = 500;
 const INPLACE = 100;
 const BUBBLE = 100;
 const INSERTION = 100;
-const QUICK = 100;
+const QUICK = 500;
 
 class ArrayBarContainer extends React.Component{
   constructor(props){
