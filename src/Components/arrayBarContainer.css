@@ -7,7 +7,7 @@
   /* padding: 0 10px 10px 10px; */
 }
 
-.card {
+.bars-card {
   margin: 2em;
 }
 
@@ -17,6 +17,10 @@
   justify-content: center;
 }
 
+.display-container{
+  display: flex;
+  flex-direction: column;
+}
 
 .abtn {
   border: black 0.5px solid;

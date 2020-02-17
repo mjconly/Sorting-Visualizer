@@ -1,5 +1,6 @@
 import React from "react";
 import ArrayBar from "./ArrayBar"
+import Scroller from "./Scroller"
 import "./arrayBarContainer.css"
 import { mergeHelper } from "../sortingAlgorithms/mergeSort"
 import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
@@ -159,46 +160,49 @@ class ArrayBarContainer extends React.Component{
 
   render(){
     return(
-      <div className="console">
-        <div className="btn-col">
-          <button className="abtn r" onClick={() => this.resetArray()}>
-            Reset
-          </button>
-          <button className="abtn"
-            onClick={() => this.mergeAnimate().then((res) => this.finished(res, 1))}
-            >
-            Merge Sort
-          </button>
-          <button className="abtn"
-            onClick={() => this.mergeInPlaceAnimate().then((res) => this.finished(res, 1))}
-            >
-            Merge In Place
-          </button>
-          <button className="abtn"
-            onClick={() => this.bubbleAnimate().then((res) => this.finished(res, 1))}
-            >
-            Bubble Sort
-          </button>
-          <button className="abtn"
-            onClick={() => this.insertionAnimate().then((res) => this.finished(res, 1))}
-            >
-            Insertion Sort
-          </button>
-          <button className="abtn"
-            onClick={() => this.quickAnimate().then((res) => this.finished(res, 1))}
-            >
-            Quick Sort
-          </button>
-          <button className="abtn"
-            onClick={() => this.heapAnimate().then((res) => this.finished(res, 1))}
-            >
-            Heap Sort
-          </button>
-        </div>
-        <div className="card">
-          <div className="array-bar-container">
-            {this.state.bars}
+      <div>
+        <div className="console">
+          <div className="btn-col">
+            <button className="abtn r" onClick={() => this.resetArray()}>
+              Reset
+            </button>
+            <button className="abtn"
+              onClick={() => this.mergeAnimate().then((res) => this.finished(res, 1))}
+              >
+              Merge Sort
+            </button>
+            <button className="abtn"
+              onClick={() => this.mergeInPlaceAnimate().then((res) => this.finished(res, 1))}
+              >
+              Merge In Place
+            </button>
+            <button className="abtn"
+              onClick={() => this.bubbleAnimate().then((res) => this.finished(res, 1))}
+              >
+              Bubble Sort
+            </button>
+            <button className="abtn"
+              onClick={() => this.insertionAnimate().then((res) => this.finished(res, 1))}
+              >
+              Insertion Sort
+            </button>
+            <button className="abtn"
+              onClick={() => this.quickAnimate().then((res) => this.finished(res, 1))}
+              >
+              Quick Sort
+            </button>
+            <button className="abtn"
+              onClick={() => this.heapAnimate().then((res) => this.finished(res, 1))}
+              >
+              Heap Sort
+            </button>
           </div>
+            <div className="card bars-card">
+              <div className="array-bar-container">
+                {this.state.bars}
+              </div>
+              <Scroller></Scroller>
+            </div>
         </div>
       </div>
     )
