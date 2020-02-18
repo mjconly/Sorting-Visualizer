@@ -5,9 +5,9 @@ const urlContent = "&action=query&format=json&prop=revisions&titles=Quick_Sort&r
 
 
 const HEAP = [1, 2];
-const MERGE = [2,3]
-const BUBBLE = [0]
-const INSERT = [0]
+const MERGE = [2,3];
+const BUBBLE = [0];
+const INSERT = [0];
 const QUICK = [0];
 
 class AlgoInfo extends React.Component{
@@ -61,14 +61,33 @@ class AlgoInfo extends React.Component{
     let code;
     let title = this.props.title;
 
+    console.log(info);
+    console.log(title)
     if (info.length !== 0){
       code = [];
-      console.log(title);
+      let context;
 
-      for (let k = 0; k < HEAP.length; k++){
-        let idx = HEAP[k];
+      if (title === "Quick Sort"){
+        context = QUICK;
+      }
+      else if (title === "Merge Sort" || title === "Merge In Place Sort"){
+        context = MERGE;
+      }
+      else if (title === "Heap Sort"){
+        context = HEAP;
+      }
+      else if (title === "Bubble Sort"){
+        context = BUBBLE;
+      }
+      else if (title === "Insertion Sort"){
+        context = INSERT;
+      }
+
+
+
+      for (let k = 0; k < context.length; k++){
+        const idx = context[k];
         let display = info[idx].textContent;
-
 
         display = display.replace(/<br\/>/gi, "<!><b><!>")
         display = display.replace(/["\n"]/gi, "<!><b><!>")

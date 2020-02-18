@@ -172,7 +172,7 @@ class ArrayBarContainer extends React.Component{
     if (alg[alg.length - 1] === "X"){
       alg = "merge";
       urlParse = `&action=parse&format=json&page=${alg}_sort&redirects=1&prop=text&formatversion=2`
-      alg = "merge in place";
+      alg = "Merge In Place";
     }
     else{
       urlParse = `&action=parse&format=json&page=${alg}_sort&redirects=1&prop=text&formatversion=2`
