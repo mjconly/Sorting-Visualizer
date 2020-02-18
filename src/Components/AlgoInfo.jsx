@@ -13,59 +13,57 @@ const QUICK = [0];
 class AlgoInfo extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      info: []
-    }
   }
 
-  componentDidMount(){
-    this.getData();
-  }
+  // componentDidMount(){
+  //   this.getData();
+  // }
 
 
-  async getData(){
-    const response = await fetch(
-      `https://en.wikipedia.org/w/api.php?origin=*${urlParse}`,
-      {
-        method: "GET",
-      }
-    )
-    .then(response => response.json())
-    .then(result => {
-      console.log(result)
-      const info = this.state.info;
-      info.push({
-        title:result.parse.title,
-        text:result.parse.text
-      })
-
-      let clean = result.parse.text.replace(/class/gi, "className");
-
-      const parser = new DOMParser();
-      const htmlNodes = parser.parseFromString(clean, "text/html")
-      const nodes = htmlNodes.getElementsByTagName("pre")
-      const nodeArr = [];
-      for (let i = 0; i < nodes.length; i++){
-        nodeArr.push(nodes[i]);
-      }
-
-      console.log(nodeArr);
-
-      this.setState({
-        info: nodeArr
-      })
-
-    })
-
-  }
+  // async getData(){
+  //   const response = await fetch(
+  //     `https://en.wikipedia.org/w/api.php?origin=*${urlParse}`,
+  //     {
+  //       method: "GET",
+  //     }
+  //   )
+  //   .then(response => response.json())
+  //   .then(result => {
+  //     console.log(result)
+  //     const info = this.state.info;
+  //     info.push({
+  //       title:result.parse.title,
+  //       text:result.parse.text
+  //     })
+  //
+  //     let clean = result.parse.text.replace(/class/gi, "className");
+  //
+  //     const parser = new DOMParser();
+  //     const htmlNodes = parser.parseFromString(clean, "text/html")
+  //     const nodes = htmlNodes.getElementsByTagName("pre")
+  //     const nodeArr = [];
+  //     for (let i = 0; i < nodes.length; i++){
+  //       nodeArr.push(nodes[i]);
+  //     }
+  //
+  //     console.log(nodeArr);
+  //
+  //     this.setState({
+  //       info: nodeArr
+  //     })
+  //
+  //   })
+  // }
 
   render(){
-    const info = this.state.info;
-    let display = "Fetching..."
+    const info = this.props.data;
+    let display = ""
     let code;
+    let title = this.props.title;
 
     if (info.length !== 0){
       code = [];
+      console.log(title);
 
       for (let k = 0; k < HEAP.length; k++){
         let idx = HEAP[k];
@@ -99,15 +97,16 @@ class AlgoInfo extends React.Component{
       }
     }
     else{
-      code = "Fetching..."
+      code = ""
     }
 
-    console.log(code);
+    const general = "Select an algorithm to visualize!"
+    const header = this.props.title === "" ? general : this.props.title;
 
     return (
-      // <div dangerouslySetInnerHTML={createMarkup(display)}>
-      // </div>
+
       <div className="card">
+        <h2 className="header">{header}</h2>
         <div className="pseudo">
           {code}
         </div>

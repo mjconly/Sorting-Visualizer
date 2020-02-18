@@ -18,12 +18,20 @@ const INSERTION = 100;
 const QUICK = 500;
 const HEAP = 500;
 
+
+//fetch and parse constants
+// const urlParse = `&action=parse&format=json&page=${alg}&redirects=1&prop=text&formatversion=2`
+// const urlContent = "&action=query&format=json&prop=revisions&titles=${}&redirects=1&formatversion=2&rvprop=content&rvslots=*"
+
+
 class ArrayBarContainer extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       bars: [],
       isRunning: false,
+      data: null,
+      query: null
     }
   }
 
@@ -32,7 +40,7 @@ class ArrayBarContainer extends React.Component{
   }
 
 
-  async resetArray(size=500){
+  async resetArray(size=500, query){
     try{
       this.isRunning();
 
@@ -47,7 +55,9 @@ class ArrayBarContainer extends React.Component{
       })
       this.setState({
         bars: barArray,
-        isRunning: false
+        isRunning: false,
+        title: query,
+        data: null
       })
 
     }
@@ -76,78 +86,127 @@ class ArrayBarContainer extends React.Component{
 
 
 //################################## Algorithm Calls #########################
-  async mergeAnimate(){
+  async mergeAnimate(alg){
     if (this.state.isRunning){
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(MERGE);
+    await this.resetArray(MERGE, "Merge Sort");
+    this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
     await mergeHelper(arrDOM)
     return 1;
   }
 
-  async mergeInPlaceAnimate(){
+  async mergeInPlaceAnimate(alg){
     if (this.state.isRunning){
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(INPLACE);
+    await this.resetArray(INPLACE, "Merge In Place Sort");
+    this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
     await inPlaceHelper(arrDOM);
     return 1;
   }
 
-  async bubbleAnimate(){
+  async bubbleAnimate(alg){
     if (this.state.isRunning){
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(BUBBLE)
+    await this.resetArray(BUBBLE, "Bubble Sort")
+    this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
     await bubbleHelper(arrDOM);
     return 1
   }
 
-  async insertionAnimate(){
+  async insertionAnimate(alg){
     if (this.state.isRunning){
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(INSERTION)
+    await this.resetArray(INSERTION, "Insertion Sort")
+    this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
     await insertionHelper(arrDOM);
     return 1
   }
 
-  async quickAnimate(){
+  async quickAnimate(alg){
     if (this.state.isRunning){
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(QUICK)
+    await this.resetArray(QUICK, "Quick Sort")
+    this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
     await quickHelper(arrDOM);
     return 1
   }
 
-  async heapAnimate(){
+  async heapAnimate(alg){
     if (this.state.isRunning){
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(HEAP)
+    await this.resetArray(HEAP, "Heap Sort")
+    this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
     await heapHelper(arrDOM);
     return 1
   }
 //#############################################################################
+
+
+  //API Fetch
+  async getData(alg){
+    let urlParse;
+    if (alg[alg.length - 1] === "X"){
+      alg = "merge";
+      urlParse = `&action=parse&format=json&page=${alg}_sort&redirects=1&prop=text&formatversion=2`
+      alg = "merge in place";
+    }
+    else{
+      urlParse = `&action=parse&format=json&page=${alg}_sort&redirects=1&prop=text&formatversion=2`
+    }
+
+
+    const response = await fetch(
+      `https://en.wikipedia.org/w/api.php?origin=*${urlParse}`,
+      {
+        method: "GET",
+      }
+    )
+    .then(response => response.json())
+    .then(result => {
+
+      let clean = result.parse.text.replace(/class/gi, "className");
+
+      const parser = new DOMParser();
+      const htmlNodes = parser.parseFromString(clean, "text/html")
+      const nodes = htmlNodes.getElementsByTagName("pre")
+      const nodeArr = [];
+      for (let i = 0; i < nodes.length; i++){
+        nodeArr.push(nodes[i]);
+      }
+
+      const title = alg.slice(0,1).toUpperCase() + alg.slice(1, alg.length) + " Sort";
+
+      this.setState({
+        data: nodeArr,
+        query: title
+      })
+
+    })
+  }
 
 //promise fucntion for async animate
   finished (status, val){
@@ -159,40 +218,43 @@ class ArrayBarContainer extends React.Component{
   }
 
   render(){
+    const title = this.state.title == null ? "" : this.state.query;
+    const data = this.state.data === null ? "" : this.state.data;
+
     return(
       <div>
         <div className="console">
           <div className="btn-col">
-            <button className="abtn r" onClick={() => this.resetArray()}>
+            <button className="abtn r" onClick={() => this.resetArray(500, null)}>
               Reset
             </button>
             <button className="abtn"
-              onClick={() => this.mergeAnimate().then((res) => this.finished(res, 1))}
+              onClick={() => this.mergeAnimate("merge").then((res) => this.finished(res, 1))}
               >
               Merge Sort
             </button>
             <button className="abtn"
-              onClick={() => this.mergeInPlaceAnimate().then((res) => this.finished(res, 1))}
+              onClick={() => this.mergeInPlaceAnimate("mergeX").then((res) => this.finished(res, 1))}
               >
               Merge In Place
             </button>
             <button className="abtn"
-              onClick={() => this.bubbleAnimate().then((res) => this.finished(res, 1))}
+              onClick={() => this.bubbleAnimate("bubble").then((res) => this.finished(res, 1))}
               >
               Bubble Sort
             </button>
             <button className="abtn"
-              onClick={() => this.insertionAnimate().then((res) => this.finished(res, 1))}
+              onClick={() => this.insertionAnimate("insertion").then((res) => this.finished(res, 1))}
               >
               Insertion Sort
             </button>
             <button className="abtn"
-              onClick={() => this.quickAnimate().then((res) => this.finished(res, 1))}
+              onClick={() => this.quickAnimate("quick").then((res) => this.finished(res, 1))}
               >
               Quick Sort
             </button>
             <button className="abtn"
-              onClick={() => this.heapAnimate().then((res) => this.finished(res, 1))}
+              onClick={() => this.heapAnimate("heap").then((res) => this.finished(res, 1))}
               >
               Heap Sort
             </button>
@@ -201,7 +263,10 @@ class ArrayBarContainer extends React.Component{
               <div className="array-bar-container">
                 {this.state.bars}
               </div>
-              <AlgoInfo></AlgoInfo>
+              <AlgoInfo
+                title={title}
+                data={data}
+                ></AlgoInfo>
             </div>
         </div>
       </div>
