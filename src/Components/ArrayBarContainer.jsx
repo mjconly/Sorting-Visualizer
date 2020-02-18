@@ -1,6 +1,6 @@
 import React from "react";
 import ArrayBar from "./ArrayBar"
-import Scroller from "./Scroller"
+import AlgoInfo from "./AlgoInfo"
 import "./arrayBarContainer.css"
 import { mergeHelper } from "../sortingAlgorithms/mergeSort"
 import { inPlaceHelper } from "../sortingAlgorithms/mergeSortInPlace"
@@ -201,7 +201,7 @@ class ArrayBarContainer extends React.Component{
               <div className="array-bar-container">
                 {this.state.bars}
               </div>
-              <Scroller></Scroller>
+              <AlgoInfo></AlgoInfo>
             </div>
         </div>
       </div>

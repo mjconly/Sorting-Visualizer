@@ -1,0 +1,21 @@
+.pseudo{
+  text-align: left;
+  align-self: center;
+}
+
+.tab{
+  margin-right: 1em;
+
+}
+
+
+.comment{
+  opacity: .5;
+  font-weight: bold;
+}
+
+.code{
+  font-weight: bold;
+  opacity: .8
+
+}
