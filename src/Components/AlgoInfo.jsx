@@ -1,16 +1,14 @@
 import React from "react";
 import "./algoInfo.css"
-const urlParse = "&action=parse&format=json&page=Merge_Sort&redirects=1&prop=text&formatversion=2"
-const urlContent = "&action=query&format=json&prop=revisions&titles=Merge_Sort&redirects=1&formatversion=2&rvprop=content&rvslots=*"
+const urlParse = "&action=parse&format=json&page=Heap_Sort&redirects=1&prop=text&formatversion=2"
+const urlContent = "&action=query&format=json&prop=revisions&titles=Quick_Sort&redirects=1&formatversion=2&rvprop=content&rvslots=*"
 
-const NEW_LINE = 1;
-const JOIN = 2;
-const IN = 3;
-const EX = 4;
-const COMMENT = 5;
 
-const TAB = "&#9"
-const LF = "&#10"
+const HEAP = [1, 2];
+const MERGE = [2,3]
+const BUBBLE = [0]
+const INSERT = [0]
+const QUICK = [0];
 
 class AlgoInfo extends React.Component{
   constructor(props){
@@ -67,30 +65,37 @@ class AlgoInfo extends React.Component{
     let code;
 
     if (info.length !== 0){
-      let display = info[0].textContent;
-
-      display = display.replace(/( |;){2}\/\/.*(\.)*/gi, "<!>")
-      display = display.replace(/<br\/>/gi, "<!><b><!>")
-      display = display.replace(/["\n"]/gi, "<!><b><!>")
-      display = display.replace(/["   "]{4}/gi, "<!><span><!>")
-
-      let codeLine = display.split("<!>")
       code = [];
 
+      for (let k = 0; k < HEAP.length; k++){
+        let idx = HEAP[k];
+        let display = info[idx].textContent;
 
-      for (let j = 0; j < codeLine.length; j++){
-        if (codeLine[j] === "<span>"){
-          code.push(<span className="tab"></span>)
+
+        display = display.replace(/<br\/>/gi, "<!><b><!>")
+        display = display.replace(/["\n"]/gi, "<!><b><!>")
+        display = display.replace(/["   "]{4}/gi, "<!><span><!>")
+
+        let codeLine = display.split("<!>")
+
+
+
+        for (let j = 0; j < codeLine.length; j++){
+          if (codeLine[j] === "<span>"){
+            code.push(<span className="tab"></span>)
+          }
+          else if (codeLine[j] === "<b>"){
+            code.push(<br/> )
+          }
+          else if (codeLine[j].slice(0,2) === "//"){
+            code.push(<span className="comment">{codeLine[j]}</span>);
+          }
+          else{
+            code.push(<span className="code">{codeLine[j]}</span>);
+          }
         }
-        else if (codeLine[j] === "<b>"){
-          code.push(<br/> )
-        }
-        else if (codeLine[j].slice(0,2) === "//"){
-          code.push(<span className="comment">{codeLine[j]}</span>);
-        }
-        else{
-          code.push(<span className="code">{codeLine[j]}</span>);
-        }
+        code.push(<br/>)
+        code.push(<br/>)
       }
     }
     else{
