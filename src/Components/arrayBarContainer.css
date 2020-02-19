@@ -4,11 +4,15 @@
   background-color: white;
   margin: 1em;
   height: 501px;
-  /* padding: 0 10px 10px 10px; */
 }
 
 .bars-card {
-  margin: 2em;
+
+}
+
+.main-card{
+    border: none;
+    margin: 2em;
 }
 
 .console{

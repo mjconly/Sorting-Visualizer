@@ -1,5 +1,8 @@
 import React from "react";
 import "./algoInfo.css"
+import Pseudo from "./Psuedo"
+
+
 const urlParse = "&action=parse&format=json&page=Heap_Sort&redirects=1&prop=text&formatversion=2"
 const urlContent = "&action=query&format=json&prop=revisions&titles=Quick_Sort&redirects=1&formatversion=2&rvprop=content&rvslots=*"
 
@@ -13,47 +16,32 @@ const QUICK = [0];
 class AlgoInfo extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      animate: true
+    }
   }
 
-  // componentDidMount(){
-  //   this.getData();
+  //fade
+  // fadeIn(data, title){
+  //       const props = useSpring(
+  //         {
+  //           to: {opacity: 1, marginLeft: 0, marginRight: 0},
+  //           from:{opactiy: 0, marginLeft: -1500, marginRight: 1500},
+  //           config:{duration:500}
+  //         }
+  //       )
+  //
+  //       return (<animated.div
+  //         style={props}>
+  //         <div className="card algo">
+  //           <h2 className="header">{title}</h2>
+  //           <div className="pseudo">
+  //            {data}
+  //          </div>
+  //        </div>
+  //      </animated.div>)
   // }
 
-
-  // async getData(){
-  //   const response = await fetch(
-  //     `https://en.wikipedia.org/w/api.php?origin=*${urlParse}`,
-  //     {
-  //       method: "GET",
-  //     }
-  //   )
-  //   .then(response => response.json())
-  //   .then(result => {
-  //     console.log(result)
-  //     const info = this.state.info;
-  //     info.push({
-  //       title:result.parse.title,
-  //       text:result.parse.text
-  //     })
-  //
-  //     let clean = result.parse.text.replace(/class/gi, "className");
-  //
-  //     const parser = new DOMParser();
-  //     const htmlNodes = parser.parseFromString(clean, "text/html")
-  //     const nodes = htmlNodes.getElementsByTagName("pre")
-  //     const nodeArr = [];
-  //     for (let i = 0; i < nodes.length; i++){
-  //       nodeArr.push(nodes[i]);
-  //     }
-  //
-  //     console.log(nodeArr);
-  //
-  //     this.setState({
-  //       info: nodeArr
-  //     })
-  //
-  //   })
-  // }
 
   render(){
     const info = this.props.data;
@@ -61,8 +49,6 @@ class AlgoInfo extends React.Component{
     let code;
     let title = this.props.title;
 
-    console.log(info);
-    console.log(title)
     if (info.length !== 0){
       code = [];
       let context;
@@ -94,9 +80,7 @@ class AlgoInfo extends React.Component{
         display = display.replace(/["   "]{4}/gi, "<!><span><!>")
 
         let codeLine = display.split("<!>")
-
-
-
+        let p = 0;
         for (let j = 0; j < codeLine.length; j++){
           if (codeLine[j] === "<span>"){
             code.push(<span className="tab"></span>)
@@ -108,7 +92,7 @@ class AlgoInfo extends React.Component{
             code.push(<span className="comment">{codeLine[j]}</span>);
           }
           else{
-            code.push(<span className="code">{codeLine[j]}</span>);
+            code.push(<span key={p++} className="code">{codeLine[j]}</span>);
           }
         }
         code.push(<br/>)
@@ -118,17 +102,18 @@ class AlgoInfo extends React.Component{
     else{
       code = ""
     }
-
+    const bool = code !== "";
     const general = "Select an algorithm to visualize!"
     const header = this.props.title === "" ? general : this.props.title;
 
     return (
-
-      <div className="card">
-        <h2 className="header">{header}</h2>
-        <div className="pseudo">
-          {code}
-        </div>
+      <div>
+         <Pseudo
+           key={this.props.ani_id}
+           data={code}
+           title={header}
+           bool={bool}
+           ></Pseudo>
       </div>
     )
   }
