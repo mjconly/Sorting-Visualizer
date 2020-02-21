@@ -1,3 +1,17 @@
+# Sorting Algorithm Visualizer
+
+## Overview
+Web application built with react that allows for the visualization of
+popular sorting algorithms. Using the wikipedia api, the pseudo implementation
+of each algorithm is also parsed and displayed.
+
+## View
+To view the application click [here](https://a-sorting-visualizer-app.herokuapp.com)
+
+
+
+
+## Create-React-Bolier-Plate
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
