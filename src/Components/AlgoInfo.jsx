@@ -16,10 +16,23 @@ const QUICK = [0];
 class AlgoInfo extends React.Component{
   constructor(props){
     super(props)
-    this.state = {
-      animate: true
-    }
+    // this.state = {
+    //   aniID: 0
+    // }
   }
+
+
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   if (this.state.aniID != nextProps.aniID){
+  //     this.setState({
+  //       aniID: this.props.aniID
+  //     })
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
 
   //fade
   // fadeIn(data, title){
@@ -102,17 +115,20 @@ class AlgoInfo extends React.Component{
     else{
       code = ""
     }
-    const bool = code !== "";
+
+    const boolCode = code !== "";
     const general = "Select an algorithm to visualize!"
     const header = this.props.title === "" ? general : this.props.title;
+    const boolTitle = header === general;
 
     return (
       <div>
          <Pseudo
-           key={this.props.ani_id}
+           key={boolCode ? this.props.aniID + 1 : this.props.aniID}
            data={code}
            title={header}
-           bool={bool}
+           boolCode={boolCode}
+           boolTitle={boolTitle}
            ></Pseudo>
       </div>
     )

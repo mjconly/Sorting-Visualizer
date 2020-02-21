@@ -34,8 +34,7 @@ class ArrayBarContainer extends React.Component{
       isRunning: false,
       data: null,
       query: null,
-      ani_id: 0,
-      run: 0
+      aniID: 0
     }
   }
 
@@ -44,7 +43,7 @@ class ArrayBarContainer extends React.Component{
   }
 
 
-  async resetArray(size=500, query, run){
+  async resetArray(size=500, query){
     try{
       this.isRunning();
 
@@ -57,14 +56,12 @@ class ArrayBarContainer extends React.Component{
           <ArrayBar value={val} key={idx}/>
         )
       })
-      const id = this.state.ani_id;
       this.setState({
         bars: barArray,
         isRunning: false,
         title: query,
         data: null,
-        ani_id: id + 1,
-        run: run
+        aniID: this.state.aniID += 1
       })
 
     }
@@ -98,7 +95,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(MERGE, "Merge Sort", 0);
+    await this.resetArray(MERGE, "Merge Sort");
     this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
@@ -111,7 +108,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(INPLACE, "Merge In Place Sort", 1);
+    await this.resetArray(INPLACE, "Merge In Place Sort");
     this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
@@ -124,7 +121,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(BUBBLE, "Bubble Sort", 1)
+    await this.resetArray(BUBBLE, "Bubble Sort")
     this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
@@ -137,7 +134,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(INSERTION, "Insertion Sort", 1)
+    await this.resetArray(INSERTION, "Insertion Sort")
     this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
@@ -150,7 +147,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(QUICK, "Quick Sort", 1)
+    await this.resetArray(QUICK, "Quick Sort")
     this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
@@ -163,7 +160,7 @@ class ArrayBarContainer extends React.Component{
       return -1;
     }
     getButtons(0.4);
-    await this.resetArray(HEAP, "Heap Sort", 1)
+    await this.resetArray(HEAP, "Heap Sort")
     this.getData(alg)
     this.startRunning();
     let arrDOM = getBars();
@@ -278,8 +275,7 @@ class ArrayBarContainer extends React.Component{
               <AlgoInfo
                 title={title}
                 data={data}
-                ani_id={this.state.ani_id * (Math.random() * 50000)}
-                run = {this.state.run}
+                aniID={this.state.aniID}
                 ></AlgoInfo>
             </div>
         </div>

@@ -5,9 +5,9 @@ import React from "react";
 import { useSpring, animated } from 'react-spring'
 
 export default function Psuedo(props) {
-  const [bool, setBool] = React.useState(true);
-  const toRender = props.bool;
-  const initial = props.run;
+  // const [bool, setBool] = React.useState(true);
+  // const toRender = props.bool;
+  // const initial = props.run;
   const propsStyle = useSpring(
     {
       to: {opacity: 1, marginLeft: 0, marginRight: 0},
@@ -16,14 +16,22 @@ export default function Psuedo(props) {
     }
   )
 
-  React.useEffect(() => {
-      setBool(!bool);
-  }, [props])
+  const outStyle = useSpring(
+    {
+      to:{marginLeft:1500, marginRight: -1500},
+      from:{marginLeft: 0, marginRight: 0},
+      config:{duration:500}
+    }
+  )
+
+  // React.useEffect(() => {
+  //     setBool(!bool);
+  // }, [props])
 
   const fadeIn = (data, title) => {
         return (<animated.div
           style={propsStyle}>
-          <div className="card algo">
+          <div className="card algo" id="algo">
             <h2 className="header">{title}</h2>
             <div className="pseudo">
              {data}
@@ -32,9 +40,10 @@ export default function Psuedo(props) {
        </animated.div>)
   }
 
+
   return(
     <div>
-      {toRender ? fadeIn(props.data,props.title) : ""}
+      {props.boolCode || props.boolTitle ? fadeIn(props.data,props.title) : ""}
     </div>
   )
 }
