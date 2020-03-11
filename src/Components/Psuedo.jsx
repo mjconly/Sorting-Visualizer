@@ -5,9 +5,6 @@ import React from "react";
 import { useSpring, animated } from 'react-spring'
 
 export default function Psuedo(props) {
-  // const [bool, setBool] = React.useState(true);
-  // const toRender = props.bool;
-  // const initial = props.run;
   const propsStyle = useSpring(
     {
       to: {opacity: 1, marginLeft: 0, marginRight: 0},
@@ -24,9 +21,6 @@ export default function Psuedo(props) {
     }
   )
 
-  // React.useEffect(() => {
-  //     setBool(!bool);
-  // }, [props])
 
   const fadeIn = (data, title) => {
         return (<animated.div

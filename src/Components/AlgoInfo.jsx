@@ -16,44 +16,7 @@ const QUICK = [0];
 class AlgoInfo extends React.Component{
   constructor(props){
     super(props)
-    // this.state = {
-    //   aniID: 0
-    // }
   }
-
-
-
-  // shouldComponentUpdate(nextProps, nextState){
-  //   if (this.state.aniID != nextProps.aniID){
-  //     this.setState({
-  //       aniID: this.props.aniID
-  //     })
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-
-  //fade
-  // fadeIn(data, title){
-  //       const props = useSpring(
-  //         {
-  //           to: {opacity: 1, marginLeft: 0, marginRight: 0},
-  //           from:{opactiy: 0, marginLeft: -1500, marginRight: 1500},
-  //           config:{duration:500}
-  //         }
-  //       )
-  //
-  //       return (<animated.div
-  //         style={props}>
-  //         <div className="card algo">
-  //           <h2 className="header">{title}</h2>
-  //           <div className="pseudo">
-  //            {data}
-  //          </div>
-  //        </div>
-  //      </animated.div>)
-  // }
 
 
   render(){
