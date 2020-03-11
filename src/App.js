@@ -11,7 +11,7 @@ function App() {
           name="description"
           content="Visualize Popular Sorting Algorithms"
         />
-        <meta name="image" content="./sortingImage.png">
+      <meta name="image" content="./sortingImage.png"/>
       </helmet>
       <ArrayBarContainer></ArrayBarContainer>
     </div>
